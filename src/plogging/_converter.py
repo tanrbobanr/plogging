@@ -22,13 +22,11 @@ SOFTWARE.
 
 """
 
+from typing import Union
 from . import types
 import string
-
-
 str_formatter = string.Formatter()
 del string
-
 
 
 class FormatContainer:
@@ -45,22 +43,22 @@ class FormatContainer:
 
 class FormatStringConverter:
     def __init__(self) -> None:
-        self.values: list[str | FormatContainer] = []
+        self.values: list[Union[str, FormatContainer]] = []
         self.awaiting_exit: FormatContainer = None
 
     @staticmethod
-    def _conversion(conversion: str | None) -> str:
+    def _conversion(conversion: Union[str, None]) -> str:
         return f"!{conversion}" if conversion else ""
 
     @staticmethod
-    def _format_spec(format_spec: str | None) -> str:
+    def _format_spec(format_spec: Union[str, None]) -> str:
         return f":{format_spec}" if format_spec else ""
 
     @staticmethod
-    def _format_statement(field_name: str | None, conversion: str, format_spec: str) -> str:
+    def _format_statement(field_name: Union[str, None], conversion: str, format_spec: str) -> str:
         return f"{{{field_name or ''}{conversion}{format_spec}}}"
 
-    def _add_flag(self, field_name: str | None, conversion: str, format_spec: str) -> None:
+    def _add_flag(self, field_name: Union[str, None], conversion: str, format_spec: str) -> None:
         self.values.append(FormatStringConverter._format_statement(field_name, conversion,
                                                                    format_spec))
 

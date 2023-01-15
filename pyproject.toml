@@ -10,7 +10,7 @@ authors = [
 ]
 description = "A formatter and set of utilities that bring pretty, highly-customizable and colored log messages to the standard logging library"
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.9"
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",

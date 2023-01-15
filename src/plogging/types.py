@@ -23,13 +23,14 @@ SOFTWARE.
 """
 
 import typing
+from typing import Union
 
 
 T = typing.TypeVar("T")
 VT = typing.TypeVar("VT")
 
 
-LoggingLevel = int | str
+LoggingLevel = Union[int, str]
 SupportsBracketFormat = str
 
 

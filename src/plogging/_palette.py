@@ -23,6 +23,7 @@ SOFTWARE.
 """
 
 from . import _level_container
+from typing import Union
 import logging
 import typing
 
@@ -32,7 +33,8 @@ class Palette:
     
     """
     def __init__(self,
-                 level_colors: _level_container.LevelContainer[str | typing.Iterable[str]]) -> None:
+                 level_colors: _level_container.LevelContainer[Union[str, typing.Iterable[str]]]
+                 ) -> None:
         """Note: all colors are defined as un-escaped ANSI codes with no ending, i.e. `x` in
         `\\033]xm`.
 
@@ -42,7 +44,7 @@ class Palette:
                           logging.CRITICAL), level_colors.iterall())
     
     def _set_colors(self, levels: typing.Iterable[int],
-                    colors: typing.Generator[str | typing.Iterable[str] | None, None, None]
+                    colors: typing.Generator[Union[str, typing.Iterable[str], None], None, None]
                     ) -> None:
         """Set `self.colors` given an iterable of logging levels and the generator returned from
         `LevelContainer.iterall()`.

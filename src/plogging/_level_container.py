@@ -22,6 +22,7 @@ SOFTWARE.
 
 """
 
+from typing import Union
 from . import types
 import typing
 
@@ -81,7 +82,7 @@ class LevelContainer(typing.Generic[types.T]):
         }
     
     def _get(self, value: typing.Optional[types.T],
-             default: types.VT | types.MISSING) -> typing.Optional[types.T | types.VT]:
+             default: Union[types.VT, types.MISSING]) -> typing.Optional[Union[types.T, types.VT]]:
         """Return value or `_default` or `default` or None.
         
         """
@@ -90,8 +91,9 @@ class LevelContainer(typing.Generic[types.T]):
     @typing.overload
     def debug(self) -> typing.Optional[types.T]: ...
     @typing.overload
-    def debug(self, default: types.VT, /) -> typing.Optional[types.T | types.VT]: ...
-    def debug(self, default: types.VT = types.MISSING, /) -> typing.Optional[types.T | types.VT]:
+    def debug(self, default: types.VT, /) -> typing.Optional[Union[types.T, types.VT]]: ...
+    def debug(self, default: types.VT = types.MISSING,
+              /) -> typing.Optional[Union[types.T, types.VT]]:
         """Get the value for the `DEBUG` logging level, with an optional default if both the value
         and container default are undefined.
         
@@ -101,8 +103,9 @@ class LevelContainer(typing.Generic[types.T]):
     @typing.overload
     def info(self) -> typing.Optional[types.T]: ...
     @typing.overload
-    def info(self, default: types.VT, /) -> typing.Optional[types.T | types.VT]: ...
-    def info(self, default: types.VT = types.MISSING, /) -> typing.Optional[types.T | types.VT]:
+    def info(self, default: types.VT, /) -> typing.Optional[Union[types.T, types.VT]]: ...
+    def info(self, default: types.VT = types.MISSING,
+             /) -> typing.Optional[Union[types.T, types.VT]]:
         """Get the value for the `INFO` logging level, with an optional default if both the value
         and container default are undefined.
         
@@ -112,8 +115,9 @@ class LevelContainer(typing.Generic[types.T]):
     @typing.overload
     def warning(self) -> typing.Optional[types.T]: ...
     @typing.overload
-    def warning(self, default: types.VT, /) -> typing.Optional[types.T | types.VT]: ...
-    def warning(self, default: types.VT = types.MISSING, /) -> typing.Optional[types.T | types.VT]:
+    def warning(self, default: types.VT, /) -> typing.Optional[Union[types.T, types.VT]]: ...
+    def warning(self, default: types.VT = types.MISSING,
+                /) -> typing.Optional[Union[types.T, types.VT]]:
         """Get the value for the `WARNING` logging level, with an optional default if both the value
         and container default are undefined.
         
@@ -123,8 +127,9 @@ class LevelContainer(typing.Generic[types.T]):
     @typing.overload
     def error(self) -> typing.Optional[types.T]: ...
     @typing.overload
-    def error(self, default: types.VT, /) -> typing.Optional[types.T | types.VT]: ...
-    def error(self, default: types.VT = types.MISSING, /) -> typing.Optional[types.T | types.VT]:
+    def error(self, default: types.VT, /) -> typing.Optional[Union[types.T, types.VT]]: ...
+    def error(self, default: types.VT = types.MISSING,
+              /) -> typing.Optional[Union[types.T, types.VT]]:
         """Get the value for the `ERROR` logging level, with an optional default if both the value
         and container default are undefined.
         
@@ -134,8 +139,9 @@ class LevelContainer(typing.Generic[types.T]):
     @typing.overload
     def critical(self) -> typing.Optional[types.T]: ...
     @typing.overload
-    def critical(self, default: types.VT, /) -> typing.Optional[types.T | types.VT]: ...
-    def critical(self, default: types.VT = types.MISSING, /) -> typing.Optional[types.T | types.VT]:
+    def critical(self, default: types.VT, /) -> typing.Optional[Union[types.T, types.VT]]: ...
+    def critical(self, default: types.VT = types.MISSING,
+                 /) -> typing.Optional[Union[types.T, types.VT]]:
         """Get the value for the `CRITICAL` logging level, with an optional default if both the
         value and container default are undefined.
         
@@ -146,9 +152,9 @@ class LevelContainer(typing.Generic[types.T]):
     def get(self, level: types.LoggingLevel, /) -> typing.Optional[types.T]: ...
     @typing.overload
     def get(self, level: types.LoggingLevel,
-            default: types.VT, /) -> typing.Optional[types.T | types.VT]: ...
+            default: types.VT, /) -> typing.Optional[Union[types.T, types.VT]]: ...
     def get(self, level: types.LoggingLevel,
-            default: types.VT = types.MISSING, /) -> typing.Optional[types.T | types.VT]:
+            default: types.VT = types.MISSING, /) -> typing.Optional[Union[types.T, types.VT]]:
         """Get the value for the the given logging level, with an optional default if both the
         value and container default are undefined.
         
@@ -161,11 +167,11 @@ class LevelContainer(typing.Generic[types.T]):
     def iterall(self, debug_default: types.VT = types.MISSING,
                 info_default: types.VT = types.MISSING, warning_default: types.VT = types.MISSING,
                 error_default: types.VT = types.MISSING, critical_default: types.VT = types.MISSING
-                ) -> typing.Generator[typing.Optional[types.T | types.VT], None, None]: ...
+                ) -> typing.Generator[typing.Optional[Union[types.T, types.VT]], None, None]: ...
     def iterall(self, debug_default: types.VT = types.MISSING,
                 info_default: types.VT = types.MISSING, warning_default: types.VT = types.MISSING,
                 error_default: types.VT = types.MISSING, critical_default: types.VT = types.MISSING
-                ) -> typing.Generator[typing.Optional[types.T | types.VT], None, None]:
+                ) -> typing.Generator[typing.Optional[Union[types.T, types.VT]], None, None]:
         """Iterate through all logging levels, with optional defaults for each level.
         
         """

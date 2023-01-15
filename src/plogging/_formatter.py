@@ -21,7 +21,6 @@ import typing
 import io
 import re
 
-
 fmt_spec = re.compile(r"^(.?[<>=^])?[+ -]?#?0?(\d+|{\w+})?[,_]?(\.(\d+|{\w+}))?[bcdefgnosx%]?$",
                       re.IGNORECASE)
 field_spec = re.compile(r"^(\d+|\w+)(\.\w+|\[[^]]+\])*$")
@@ -120,11 +119,11 @@ class Formatter(logging.Formatter):
         self.fmts = fmts
         self.backup_fmts = backup_fmts
         
-        super().__init__(None, datefmt, "{", False, defaults=defaults)
+        super().__init__()
     
     @staticmethod
     def _ensure_format_validity(fmt: _level_container.LevelContainer[types.SupportsBracketFormat],
-                                extras: list[str]) -> None:
+                                extras: "list[str]") -> None:
         """Ensure all formats in `fmt` are valid bracket-style format strings and that all fields
         are in either VALID_FLAGS or `extras`.
         
